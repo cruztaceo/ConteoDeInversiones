@@ -11,12 +11,12 @@ internal class MainKtTest{
         assertTrue(intArrayOf(1,2,3,4,5,6).contentEquals(result.second))
     }
 
-//    @Test
-//    fun sortAndCountTens() {
-//        val array = intArrayOf(10,30,50,20,40,60)
-//        val result = sortAndCount(array)
-//        result.second.map { println(it) }
-//        assertEquals(3, result.first)
-//        assertTrue(intArrayOf(1,2,3,4,5,6).contentEquals(result.second))
-//    }
+    @Test
+    fun sortAndCountTens() {
+        val array = intArrayOf(11230,32150,3165450,252150,51540,260)
+        val result = sortAndCount(array)
+        result.second.map { println(it) }
+        assertEquals(8, result.first)
+        assertTrue(intArrayOf(260,11230,32150,51540,252150,3165450).contentEquals(result.second))
+    }
 }

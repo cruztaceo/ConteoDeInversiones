@@ -14,7 +14,7 @@ fun readFileAsLinesUsingBufferedReader(fileName: String): List<String>
 
 fun sortAndCount(L: IntArray): Pair<Long, IntArray>{
     return if(L.size == 1) {
-        Pair(0, intArrayOf())
+        Pair(0, L)
     }
     else{
         val half = L.size / 2
@@ -22,15 +22,13 @@ fun sortAndCount(L: IntArray): Pair<Long, IntArray>{
         val B = L.slice(half until L.size).toIntArray()
         val arrayA = sortAndCount(A)
         val arrayB = sortAndCount(B)
-        val result = mergeAndCount(A, B)
+        val result = mergeAndCount(arrayA.second, arrayB.second)
         Pair(result.first + arrayA.first + arrayB.first, result.second)
     }
 }
 
 fun mergeAndCount(A: IntArray, B: IntArray): Pair<Int, IntArray> {
     val C = mutableListOf<Int>()
-    val tempA = A.toMutableList()
-    val tempB = B.toMutableList()
     var count = 0
     var i = 0
     var j = 0
