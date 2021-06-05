@@ -2,21 +2,27 @@ import java.io.File
 import kotlin.math.min
 
 fun main(args: Array<String>) {
-    val input = readFileAsLinesUsingBufferedReader("src/main/resources/IntegerArray.txt").map { it.toInt() }.toIntArray()
+    val inputFileName = "src/main/resources/IntegerArray.txt"
+    val outputFileName = "src/main/resources/OutputIntegerArray.txt"
+    val input = readFileAsLinesUsingBufferedReader(inputFileName).map { it.toInt() }.toIntArray()
     val pair = sortAndCount(input);
-    println("Operations = ${pair.first}")
-    println("==========================")
-    pair.second.map { println(it) }
+//    println("Operations = ${pair.first}")
+//    println("==========================")
+//    pair.second.map { println(it) }
+    val outputFile = File(outputFileName).printWriter()
+    outputFile.use { out ->
+        out.println("Operations: ${pair.first}")
+        out.println("==========================")
+        out.println(pair.second.contentToString())
+    }
 }
 
-fun readFileAsLinesUsingBufferedReader(fileName: String): List<String>
-        = File(fileName).bufferedReader().readLines()
+fun readFileAsLinesUsingBufferedReader(fileName: String): List<String> = File(fileName).bufferedReader().readLines()
 
-fun sortAndCount(L: IntArray): Pair<Long, IntArray>{
-    return if(L.size == 1) {
+fun sortAndCount(L: IntArray): Pair<Long, IntArray> {
+    return if (L.size == 1) {
         Pair(0, L)
-    }
-    else{
+    } else {
         val half = L.size / 2
         val A = L.slice(0 until half).toIntArray()
         val B = L.slice(half until L.size).toIntArray()
@@ -34,20 +40,19 @@ fun mergeAndCount(A: IntArray, B: IntArray): Pair<Int, IntArray> {
     var j = 0
     var result = mutableListOf<Int>()
 
-    while (i < A.size && j < B.size){
+    while (i < A.size && j < B.size) {
         C.add(min(A[i], B[j]))
-        if(B[j] < A[i]) {
+        if (B[j] < A[i]) {
             result = A.slice(i until A.size).toMutableList()
             count += result.size
             j++
-        }
-        else {
+        } else {
             i++
         }
     }
-    if(i >= A.size)
+    if (i >= A.size)
         result = B.sliceArray(j until B.size).toMutableList()
-    else if(j >= B.size)
+    else if (j >= B.size)
         result = A.sliceArray(i until A.size).toMutableList()
     C.addAll(result)
     return Pair(count, C.toIntArray())
