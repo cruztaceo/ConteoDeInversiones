@@ -14,8 +14,20 @@ fun main() {
     }
 }
 
+/**
+ * Read file
+ *
+ * @param fileName Read file
+ * @return List of strings read
+ */
 fun readFileAsLinesUsingBufferedReader(fileName: String): List<String> = File(fileName).bufferedReader().readLines()
 
+/**
+ * Main method to sort arrays using SortAndCount
+ *
+ * @param L any array
+ * @return Sorted array
+ */
 fun sortAndCount(L: IntArray): Pair<Long, IntArray> {
     return if (L.size == 1) {
         Pair(0, L)
@@ -30,6 +42,13 @@ fun sortAndCount(L: IntArray): Pair<Long, IntArray> {
     }
 }
 
+/**
+ * Merge and count inversions
+ *
+ * @param A Sorted array
+ * @param B Sorted array
+ * @return Pair of results <Counter, SortedArray>
+ */
 fun mergeAndCount(A: IntArray, B: IntArray): Pair<Int, IntArray> {
     val C = mutableListOf<Int>()
     var count = 0
