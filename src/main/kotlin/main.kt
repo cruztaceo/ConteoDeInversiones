@@ -1,14 +1,11 @@
 import java.io.File
 import kotlin.math.min
 
-fun main(args: Array<String>) {
+fun main() {
     val inputFileName = "src/main/resources/IntegerArray.txt"
-    val outputFileName = "src/main/resources/OutputIntegerArray.txt"
+    val outputFileName = "src/main/resources/ConteoInversionesOutputArray.txt"
     val input = readFileAsLinesUsingBufferedReader(inputFileName).map { it.toInt() }.toIntArray()
-    val pair = sortAndCount(input);
-//    println("Operations = ${pair.first}")
-//    println("==========================")
-//    pair.second.map { println(it) }
+    val pair = sortAndCount(input)
     val outputFile = File(outputFileName).printWriter()
     outputFile.use { out ->
         out.println("Operations: ${pair.first}")
